@@ -1,0 +1,48 @@
+REMARK 111 MOLP: SMILES: s: Nc1ncnc2nc[nH]c12
+REMARK 111 MOLP: Area_F: f:     0.0000
+REMARK 111 MOLP: Area_C: f:    38.5415
+REMARK 111 MOLP: Area_CL: f:     0.0000
+REMARK 111 MOLP: Area_N: f:    44.2012
+REMARK 111 MOLP: Area_O: f:     0.0000
+REMARK 111 MOLP: Area_H: f:    55.0440
+REMARK 111 MOLP: Area_I: f:     0.0000
+REMARK 111 MOLP: MolVolume: f:   117.6160
+REMARK 111 MOLP: Area_P: f:     0.0000
+REMARK 111 MOLP: Area_BR: f:     0.0000
+REMARK 111 MOLP: Area_S: f:     0.0000
+REMARK 111 MOLP: MolArea: f:   137.7870
+REMARK 111 MOLP: ElecSolvEng: f: -22.672981
+REMARK 111 MOLP: Dipole: f:   2.953149
+REMARK 111 MOLP: Quadrupole: f:  10.549820
+REMARK 666 LABELS|PMP_INFO:80s|AtomArea:10f|AT_gaff:6s|resp:10f|mbondi:10f|AT_sybyl:6s|Dipole:10f|Quadrupole:10f|AtomSolEng:10f
+ATOM      1  N1  MOL     1       1.847  -1.802   0.000 3    2    3    4      N      5.9002    nh   -1.1165    1.5500 N.pl3  0.114422  1.635276  3.829021
+ATOM      2  H1  MOL     1       2.841  -1.798  -0.001 1    1                H     11.6272    hn    0.4648    1.3000     H  0.069730  0.186501 -2.515341
+ATOM      3  H2  MOL     1       1.373  -2.672  -0.001 1    1                H     10.5809    hn    0.4648    1.3000     H  0.072879  0.186976 -5.645332
+ATOM      4  C1  MOL     1       1.203  -0.612   0.000 3    1    5   15      C      6.8641    ca    0.9326    1.7000  C.ar  0.049202  0.855411  2.072776
+ATOM      5  N2  MOL     1       1.931   0.487   0.000 2    4    6           N     10.2197    nb   -0.8232    1.5500  N.ar  0.663710  1.204420 -8.512054
+ATOM      6  C2  MOL     1       1.307   1.666   0.000 3    5    7    8      C      9.0649    ca    0.5589    1.7000  C.ar  0.112717  0.776942  5.317554
+ATOM      7  H3  MOL     1       1.957   2.522  -0.000 1    6                H     10.7480    h5    0.0786    1.3000     H  0.124398  0.151832  0.433290
+ATOM      8  N3  MOL     1       0.025   1.907  -0.000 2    6    9           N     11.1995    nb   -0.8091    1.5500  N.ar  0.645626  1.084053-12.957293
+ATOM      9  C3  MOL     1      -0.721   0.801  -0.000 3    8   10   15      C      6.4160    ca    0.9429    1.7000  C.ar  0.017720  0.970043  8.866918
+ATOM     10  N4  MOL     1      -2.092   0.739  -0.000 2    9   11           N     12.1638    nc   -0.6833    1.5500   N.2  0.665902  0.978722 -8.911088
+ATOM     11  C4  MOL     1      -2.362  -0.520   0.000 3   10   12   13      C      9.6900    cd    0.3357    1.7000   C.2  0.160599  0.856776 -0.225623
+ATOM     12  H4  MOL     1      -3.353  -0.928   0.000 1   11                H     11.0713    h5    0.1257    1.3000     H  0.112096  0.162560 -0.982033
+ATOM     13  N5  MOL     1      -1.278  -1.327   0.000 3   11   14   15      N      4.7178    na   -0.4828    1.5500 N.pl3  0.154855  1.438618  2.920616
+ATOM     14  H5  MOL     1      -1.292  -2.319   0.000 1   13                H     11.0163    hn    0.3825    1.3000     H  0.064782  0.166238 -6.154889
+ATOM     15  C5  MOL     1      -0.186  -0.474   0.000 3    4    9   13      C      6.5063    ca   -0.3718    1.7000  C.ar  0.084605  1.399239 -0.209503
+CONECT    1    2    3    4
+CONECT    2    1
+CONECT    3    1
+CONECT    4    1    5    5   15
+CONECT    5    4    4    6
+CONECT    6    5    7    8    8
+CONECT    7    6
+CONECT    8    6    6    9
+CONECT    9    8   10   15   15
+CONECT   10    9   11   11
+CONECT   11   10   10   12   13
+CONECT   12   11
+CONECT   13   11   14   15
+CONECT   14   13
+CONECT   15    4    9    9   13
+END

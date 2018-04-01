@@ -1,0 +1,30 @@
+REMARK 111 MOLP: SMILES: s:    ClC=CCl
+REMARK 111 MOLP: Area_F: f:     0.0000
+REMARK 111 MOLP: Area_C: f:    16.4194
+REMARK 111 MOLP: Area_CL: f:    52.5138
+REMARK 111 MOLP: Area_N: f:     0.0000
+REMARK 111 MOLP: Area_O: f:     0.0000
+REMARK 111 MOLP: Area_H: f:    22.1692
+REMARK 111 MOLP: Area_I: f:     0.0000
+REMARK 111 MOLP: MolVolume: f:    68.6880
+REMARK 111 MOLP: Area_P: f:     0.0000
+REMARK 111 MOLP: Area_BR: f:     0.0000
+REMARK 111 MOLP: Area_S: f:     0.0000
+REMARK 111 MOLP: MolArea: f:    91.1025
+REMARK 111 MOLP: ElecSolvEng: f:  -2.855644
+REMARK 111 MOLP: Dipole: f:   0.923595
+REMARK 111 MOLP: Quadrupole: f:   4.384640
+REMARK 666 LABELS|PMP_INFO:80s|AtomArea:10f|AT_gaff:6s|resp:10f|mbondi:10f|AT_sybyl:6s|Dipole:10f|Quadrupole:10f|AtomSolEng:10f
+ATOM      1  Cl1 MOL     1       0.000   1.662  -0.446 1    2               CL     26.4571    cl   -0.0638    1.7000    Cl  0.752278  2.176240 -0.267143
+ATOM      2  C1  MOL     1      -0.000   0.656   0.951 3    1    3    4      C      8.7970    c2   -0.1175    1.7000   C.2  0.483934  1.078029  0.116385
+ATOM      3  H1  MOL     1      -0.000   1.195   1.877 1    2                H     11.1787    h4    0.1814    1.3000     H  0.108982  0.187038 -1.276988
+ATOM      4  C2  MOL     1       0.000  -0.656   0.951 3    2    5    6      C      7.6224    c2   -0.1175    1.7000   C.2  0.483934  1.078029  0.116383
+ATOM      5  H2  MOL     1       0.000  -1.195   1.877 1    4                H     10.9905    h4    0.1814    1.3000     H  0.108982  0.187038 -1.277180
+ATOM      6  Cl2 MOL     1      -0.000  -1.662  -0.446 1    4               CL     26.0566    cl   -0.0638    1.7000    Cl  0.752278  2.176240 -0.267102
+CONECT    1    2
+CONECT    2    1    3    4    4
+CONECT    3    2
+CONECT    4    2    2    5    6
+CONECT    5    4
+CONECT    6    4
+END

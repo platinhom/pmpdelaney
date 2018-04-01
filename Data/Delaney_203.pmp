@@ -1,0 +1,32 @@
+REMARK 111 MOLP: SMILES: s:       C#CC
+REMARK 111 MOLP: Area_F: f:     0.0000
+REMARK 111 MOLP: Area_C: f:    35.7954
+REMARK 111 MOLP: Area_CL: f:     0.0000
+REMARK 111 MOLP: Area_N: f:     0.0000
+REMARK 111 MOLP: Area_O: f:     0.0000
+REMARK 111 MOLP: Area_H: f:    43.6571
+REMARK 111 MOLP: Area_I: f:     0.0000
+REMARK 111 MOLP: MolVolume: f:    56.3120
+REMARK 111 MOLP: Area_P: f:     0.0000
+REMARK 111 MOLP: Area_BR: f:     0.0000
+REMARK 111 MOLP: Area_S: f:     0.0000
+REMARK 111 MOLP: MolArea: f:    79.4525
+REMARK 111 MOLP: ElecSolvEng: f:  -3.722497
+REMARK 111 MOLP: Dipole: f:   0.251023
+REMARK 111 MOLP: Quadrupole: f:   4.317808
+REMARK 666 LABELS|PMP_INFO:80s|AtomArea:10f|AT_gaff:6s|resp:10f|mbondi:10f|AT_sybyl:6s|Dipole:10f|Quadrupole:10f|AtomSolEng:10f
+ATOM      1  C1  MOL     1       1.241  -0.000  -0.000 4    2    3    4    5 C      4.6983    c3   -0.2718    1.7000   C.3  0.094360  0.105949  0.046509
+ATOM      2  H1  MOL     1       1.623  -0.348  -0.953 1    1                H     11.0080    hc    0.1126    1.3000     H  0.135284  0.173530 -0.239177
+ATOM      3  H2  MOL     1       1.623  -0.652   0.778 1    1                H     11.0615    hc    0.1126    1.3000     H  0.135289  0.173532 -0.239715
+ATOM      4  H3  MOL     1       1.623   0.999   0.176 1    1                H     10.9484    hc    0.1126    1.3000     H  0.135288  0.173533 -0.239054
+ATOM      5  C2  MOL     1      -0.227   0.000   0.000 2    1    6           C     14.0595    c1    0.1638    1.7000   C.1  0.058231  1.406334  1.034393
+ATOM      6  C3  MOL     1      -1.414  -0.000  -0.000 2    5    7           C     17.0374    c1   -0.5755    1.7000   C.1  0.021494  1.590121 -4.050559
+ATOM      7  H4  MOL     1      -2.471  -0.000  -0.000 1    6                H     10.6390    ha    0.3456    1.3000     H  0.079891  0.230702 -0.034894
+CONECT    1    2    3    4    5
+CONECT    2    1
+CONECT    3    1
+CONECT    4    1
+CONECT    5    1    6    6    6
+CONECT    6    5    5    5    7
+CONECT    7    6
+END

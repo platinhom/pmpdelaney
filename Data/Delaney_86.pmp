@@ -1,0 +1,34 @@
+REMARK 111 MOLP: SMILES: s: ClC(Cl)(Cl)C(Cl)(Cl)Cl
+REMARK 111 MOLP: Area_F: f:     0.0000
+REMARK 111 MOLP: Area_C: f:     0.0000
+REMARK 111 MOLP: Area_CL: f:   141.8131
+REMARK 111 MOLP: Area_N: f:     0.0000
+REMARK 111 MOLP: Area_O: f:     0.0000
+REMARK 111 MOLP: Area_H: f:     0.0000
+REMARK 111 MOLP: Area_I: f:     0.0000
+REMARK 111 MOLP: MolVolume: f:   130.9320
+REMARK 111 MOLP: Area_P: f:     0.0000
+REMARK 111 MOLP: Area_BR: f:     0.0000
+REMARK 111 MOLP: Area_S: f:     0.0000
+REMARK 111 MOLP: MolArea: f:   141.8130
+REMARK 111 MOLP: ElecSolvEng: f:  -2.332799
+REMARK 111 MOLP: Dipole: f:   0.000014
+REMARK 111 MOLP: Quadrupole: f:   1.507080
+REMARK 666 LABELS|PMP_INFO:80s|AtomArea:10f|AT_gaff:6s|resp:10f|mbondi:10f|AT_sybyl:6s|Dipole:10f|Quadrupole:10f|AtomSolEng:10f
+ATOM      1  Cl1 MOL     1       1.400   1.316   1.014 1    2               CL     23.7711    cl    0.2078    1.7000    Cl  0.682407  2.257234  0.463271
+ATOM      2  C1  MOL     1       0.791   0.000   0.000 4    1    3    4    5 C      0.0000    c3   -0.6235    1.7000   C.3  0.499356  0.651510 -2.559122
+ATOM      3  Cl2 MOL     1       1.400  -1.536   0.633 1    2               CL     23.4198    cl    0.2078    1.7000    Cl  0.682406  2.257228  0.464394
+ATOM      4  Cl3 MOL     1       1.400   0.220  -1.647 1    2               CL     23.6777    cl    0.2078    1.7000    Cl  0.682412  2.257237  0.465182
+ATOM      5  C2  MOL     1      -0.791  -0.000   0.000 4    2    6    7    8 C      0.0000    c3   -0.6235    1.7000   C.3  0.499356  0.651513 -2.559453
+ATOM      6  Cl4 MOL     1      -1.400  -0.220   1.647 1    5               CL     23.7432    cl    0.2078    1.7000    Cl  0.682402  2.257224  0.465349
+ATOM      7  Cl5 MOL     1      -1.400  -1.316  -1.014 1    5               CL     23.5007    cl    0.2078    1.7000    Cl  0.682405  2.257227  0.463208
+ATOM      8  Cl6 MOL     1      -1.400   1.536  -0.633 1    5               CL     23.7003    cl    0.2078    1.7000    Cl  0.682395  2.257215  0.464371
+CONECT    1    2
+CONECT    2    1    3    4    5
+CONECT    3    2
+CONECT    4    2
+CONECT    5    2    6    7    8
+CONECT    6    5
+CONECT    7    5
+CONECT    8    5
+END
