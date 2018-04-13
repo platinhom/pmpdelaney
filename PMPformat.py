@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 
 '''
+PMPformat module.
+
 Module to generate and read the PMP Format file. 
 
 Notice: If using PDB/PQR format as input, you should use a 
@@ -12,6 +14,7 @@ TODO:
    This format can be read by Rdkit as PDB format normally. However, other software?  
    Is it essential to save bond order in 81~84? 
 
+Version 0.1
 Update: 2018.4.1 by Zhixiong Zhao
 XtalPi Inc.
 '''
@@ -205,6 +208,67 @@ class PMPFormator(object):
                 newblock += line+"\n"
         return newblock
 
+    def AssignBondOrdersFromTemplate(self, refmol, mol):
+        """ assigns bond orders to a molecule based on the
+            bond orders in a template molecule
+
+        Revised from AllChem.AssignBondOrderFromTemplate(refmol, mol)
+        """
+        AllChem.AssignBondOrdersFromTemplate
+        refmol2 = Chem.rdchem.Mol(refmol)
+        mol2 = Chem.rdchem.Mol(mol)
+        # do the molecules match already?
+        matching = mol2.GetSubstructMatch(refmol2)
+        if not matching:  # no, they don't match
+            # check if bonds of mol are SINGLE
+            for b in mol2.GetBonds():
+                if b.GetBondType() != Chem.BondType.SINGLE:
+                    b.SetBondType(Chem.BondType.SINGLE)
+                    b.SetIsAromatic(False)
+            # set the bonds of mol to SINGLE
+            for b in refmol2.GetBonds():
+                b.SetBondType(Chem.BondType.SINGLE)
+                b.SetIsAromatic(False)
+            # set atom charges to zero;
+            for a in refmol2.GetAtoms():
+                a.SetFormalCharge(0)
+            for a in mol2.GetAtoms():
+                a.SetFormalCharge(0)
+
+            matching = mol2.GetSubstructMatches(refmol2, uniquify=False)
+            # do the molecules match now?
+            if matching:
+                if len(matching) > 1:
+                    #logger.warning("More than one matching pattern found - picking one")
+                    pass
+                matchings=matching[:]
+                for matching in matchings:
+                    #matching = matching[0] ## use each matching
+                    # apply matching: set bond properties
+                    for b in refmol.GetBonds():
+                        atom1 = matching[b.GetBeginAtomIdx()]
+                        atom2 = matching[b.GetEndAtomIdx()]
+                        b2 = mol2.GetBondBetweenAtoms(atom1, atom2)
+                        b2.SetBondType(b.GetBondType())
+                        b2.SetIsAromatic(b.GetIsAromatic())
+                    # apply matching: set atom properties
+                    for a in refmol.GetAtoms():
+                        a2 = mol2.GetAtomWithIdx(matching[a.GetIdx()])
+                        a2.SetHybridization(a.GetHybridization())
+                        a2.SetIsAromatic(a.GetIsAromatic())
+                        a2.SetNumExplicitHs(a.GetNumExplicitHs())
+                        a2.SetFormalCharge(a.GetFormalCharge())
+                    try:
+                        Chem.SanitizeMol(mol2)
+                        if hasattr(mol2, '__sssAtoms'):
+                            mol2.__sssAtoms = None  # we don't want all bonds highlighted
+                        break
+                    except ValueError:
+                        logger.warning("More than one matching pattern, Fail at this matching. Try next.")
+            else:
+                raise ValueError("No matching found")
+        return mol2
+
     def MolMatchBondBySmiles(self,smiles, mol=None):
         '''Using ref smiles to modify the bond type of given molecule "mol".
         If "mol" not given, using the inner molecule and update it!
@@ -216,10 +280,10 @@ class PMPFormator(object):
         refmol = Chem.MolFromSmiles(smiles, sanitize = True)
         refmol = Chem.MolFromSmiles(Chem.MolToSmiles(refmol), sanitize = True)
         if mol:
-            mdone  = AllChem.AssignBondOrdersFromTemplate(refmol,mol)
+            mdone  = self.AssignBondOrdersFromTemplate(refmol,mol)
             return mdone
         elif self._mol:
-            mdone  = AllChem.AssignBondOrdersFromTemplate(refmol,self._mol)
+            mdone  = self.AssignBondOrdersFromTemplate(refmol,self._mol)
             pdbblock = Chem.MolToPDBBlock(mdone, flavor = 4)
             self._pmp = self.PMPfromPDBblock(pdbblock)
             self._mol = mdone
@@ -234,10 +298,10 @@ class PMPFormator(object):
         ''' 
         refmol = Chem.MolFromMol2File(mol2file, sanitize = True, removeHs=False)
         if mol:
-            mdone  = AllChem.AssignBondOrdersFromTemplate(refmol,mol)
+            mdone  = self.AssignBondOrdersFromTemplate(refmol,mol)
             return mdone
         elif self._mol:
-            mdone  = AllChem.AssignBondOrdersFromTemplate(refmol,self._mol)
+            mdone  = self.AssignBondOrdersFromTemplate(refmol,self._mol)
             pdbblock = Chem.MolToPDBBlock(mdone, flavor = 4)
             self._pmp = self.PMPfromPDBblock(pdbblock)
             self._mol = mdone
@@ -333,7 +397,97 @@ class PMPFormator(object):
         ''' Get the PMP Block'''
         return self._pmp
 
+if __DEBUG: 
+    def ProcessGDMAdata(fname, multipole=2):
+        ''' Process GDMA output 
+        Return AtomPropDict{pname:[values..]}, MolPropDict{pname: value}'''
+        with open(fname) as f:
+            lines = f.readlines()
+            atomdatas={}
+            moldatas = {}
+            for i in range(multipole):
+                if i == 0:
+                    atomdatas['Dipole']=[]
+                elif i == 1:
+                    atomdatas['Quadrupole']=[]
+                elif i == 2:
+                    atomdatas['Octopole']=[]           
+                elif i == 3:
+                    atomdatas['Hexadecapole']=[] 
+            for line in lines:
+                if line[0] != "#" and len(line)>50:
+                    data=line.split()
+                    for i in range(multipole):
+                        if i == 0:
+                            atomdatas['Dipole'].append(float(data[6]))
+                        elif i == 1:
+                            atomdatas['Quadrupole'].append(float(data[7]))
+                        elif i == 2:
+                            atomdatas['Octopole'].append(float(data[8]))           
+                        elif i == 3:
+                            atomdatas['Hexadecapole'].append(float(data[9]))
+                elif line[0] != "#":
+                    data=line.split()
+                    for i in range(multipole):
+                        if i == 0:
+                            moldatas['Dipole'] = float(data[1])
+                        elif i == 1:
+                            moldatas['Quadrupole'] = float(data[2])
+                        elif i == 2:
+                            moldatas['Octopole'] = float(data[3])           
+                        elif i == 3:
+                            moldatas['Hexadecapole'] = float(data[4])
+            return atomdatas, moldatas
 
+    def ProcessAtomSolEng(fname):
+        '''Read Atomic Solvation Energy data from MIBPB result.'''
+        with open(fname) as f:
+            lines = f.readlines()
+            datas=map(float,[ line.strip() for line in lines])
+        return datas
+
+    def ProcessPQRTA(fname, atomtype, charge="resp", radius="mbondi"):
+        '''Read many data(Atomic data) and (Mol data) from PQRTA'''
+        moldatas={}
+        atomdatas={charge:[],radius:[],atomtype:[],"AtomArea":[]}
+        with open(fname) as f:
+            for line in f:
+                if line[:6] == "REMARK":
+                    tmps=line.strip().split()
+                    if tmps[1] == "AREAS":
+                        moldatas['MolArea']=float(tmps[2])
+                    elif tmps[1] == "VOLUMES":
+                        moldatas['MolVolume']=float(tmps[2])
+                    elif tmps[1] == "AREA":
+                        moldatas['Area_'+tmps[2]]=float(tmps[3])
+                elif line[:6] == "ATOM  " or line[:6] == "HETATM":
+                    atomdatas[charge].append(float(line[54:62].strip()))
+                    atomdatas[radius].append(float(line[62:70].strip()))
+                    atomdatas[atomtype].append(line[80:88].strip())
+                    atomdatas["AtomArea"].append(float(line[88:100].strip()))
+            return atomdatas, moldatas
+
+    def ProcessMol2AtomType(fname):
+        '''Read SYBYL Atom Type from mol2 file'''
+        datas=[]
+        findatom=False
+        with open(fname) as f:   
+            for line in f:
+                if not findatom and "@<TRIPOS>ATOM" in line:
+                    findatom=True
+                    continue
+                if "@<TRIPOS>BOND" in line:
+                    break
+                if findatom:
+                    datas.append(line.split()[5])
+        return datas
+
+    def ProcessMIBPBresults(fname):
+        '''Read Electrostatic solvation energy from MIBPB output'''
+        with open(fname) as f:   
+            for line in f:
+                if "Electrostatics solvation engergy=:" in line:
+                    return float(line.strip().split(':')[1].strip())
 
 if __DEBUG:
     os.chdir("/home/hom/Desktop/DailyWork/Cheminfo/20180329_PMPformat/")
@@ -341,7 +495,7 @@ if __DEBUG:
     pmpf = PMPFormator()
 
     print "Initial from Mol2 file "
-    mol = pmpf.MolFromMol2File('~data/test.mol2')
+    mol = pmpf.MolFromMol2File('_data/test.mol2')
     print Chem.MolToSmiles(mol)
     #print pmpf._pmp
 
@@ -352,23 +506,23 @@ if __DEBUG:
 
 if __DEBUG:
     print "Initial from PDB based on mol2"
-    m1 = pmpf.MolFromPDBFile('~data/test.pqr', refmol2file="~data/test.mol2")
+    m1 = pmpf.MolFromPDBFile('_data/test.pqr', refmol2file="_data/test.mol2")
     print Chem.MolToSmiles(m1)
     #print pmpf._pmp
 
 ## Explict H in Ref Mol from Smiles will get wrong result 
 if __DEBUG:
     print "Initial from PDB based on smiles without explicit H"
-    m2 = pmpf.MolFromPDBFile('~data/test.pqr', refsmiles="c1sccc1")
+    m2 = pmpf.MolFromPDBFile('_data/test.pqr', refsmiles="c1sccc1")
     print Chem.MolToSmiles(m2)
     print "Initial from PDB based on smiles with explicit H"
-    m2 = pmpf.MolFromPDBFile('~data/test.pqr', refsmiles="[H]c1sc([H])c([H])c1[H]")
+    m2 = pmpf.MolFromPDBFile('_data/test.pqr', refsmiles="[H]c1sc([H])c([H])c1[H]")
     print Chem.MolToSmiles(m2)
     #print pmpf._pmp
 
 ## Test Reading GDMA data
 if __DEBUG:
-    GDMAdata, MolGDMA=ProcessGDMAdata('~data/test.gdma',multipole=2)
+    GDMAdata, MolGDMA=ProcessGDMAdata('_data/test.gdma',multipole=2)
     for item,value in GDMAdata.items():
         pmpf.SetAtomsProp(value, item, ptype='f', plen=10,floatPoint=6)
     for item,value in MolGDMA.items():
@@ -379,13 +533,13 @@ if __DEBUG:
 
 ## Test Reading Atomic Solvation Energy
 if __DEBUG:
-    soldata = ProcessAtomSolEng('~data/AtomSoleng.txt')
+    soldata = ProcessAtomSolEng('_data/AtomSoleng.txt')
     pmpf.SetAtomsProp(soldata, "AtomSolEng", ptype='f', plen=10,floatPoint=6)
 
 ## Test Reading From PQRTA
 if __DEBUG:
     atomtype="AT_gaff"
-    AtomDatas, MolDatas= ProcessPQRTA('~data/test.pqrta', atomtype=atomtype,charge="resp", radius="mbondi")
+    AtomDatas, MolDatas= ProcessPQRTA('_data/test.pqrta', atomtype=atomtype,charge="resp", radius="mbondi")
     for item,value in AtomDatas.items():
         if item != atomtype:
             pmpf.SetAtomsProp(value, item, ptype='f', plen=10,floatPoint=4)
@@ -396,15 +550,16 @@ if __DEBUG:
 
 ## Test Reading SYBYL Type and MIBPB result
 if __DEBUG:
-    sybyltype = ProcessMol2AtomType('~data/test.mol2')
+    sybyltype = ProcessMol2AtomType('_data/test.mol2')
     pmpf.SetAtomsProp(sybyltype, "AT_sybyl", ptype='s', plen=6)
-    mibpbOut = ProcessMIBPBresults('~data/mibpb5.log')
+    
+    mibpbOut = ProcessMIBPBresults('_data/mibpb5.log')
     pmpf.SetMolProp(mibpbOut, 'ElecSolvEng', ptype='f', plen=10,floatPoint=6)  
 
 ## Test Writing and Reading PMP file
 if __DEBUG:
-    pmpf.MolToPMPFile('test.pmp')
-    pmpf2 = PMPFormator(pmpfile='test.pmp')
+    pmpf.MolToPMPFile('_data/test.pmp')
+    pmpf2 = PMPFormator(pmpfile='_data/test.pmp')
     print Chem.MolToSmiles(pmpf2._mol)
     print pmpf2._mol.GetPropsAsDict()
     print pmpf2._mol.GetAtomWithIdx(0).GetPropsAsDict()
