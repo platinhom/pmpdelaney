@@ -1,4 +1,4 @@
-REMARK 111 MOLP: SMILES: s: O=[N+]([O-])C(Cl)(Cl)Cl
+REMARK 111 MOLP: SMILES: s: ClC(Cl)(Cl)N(=O)=O
 REMARK 111 MOLP: Area_F: f:     0.0000
 REMARK 111 MOLP: Area_C: f:     0.0000
 REMARK 111 MOLP: Area_CL: f:    75.2817

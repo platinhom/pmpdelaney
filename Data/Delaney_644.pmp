@@ -1,4 +1,4 @@
-REMARK 111 MOLP: SMILES: s: c1ccc2c(c1)CCCC2
+REMARK 111 MOLP: SMILES: s: C1CCc2ccccc2C1
 REMARK 111 MOLP: Area_F: f:     0.0000
 REMARK 111 MOLP: Area_C: f:    43.9060
 REMARK 111 MOLP: Area_CL: f:     0.0000
@@ -46,16 +46,16 @@ CONECT    6    4
 CONECT    7    4    8    9   10
 CONECT    8    7
 CONECT    9    7
-CONECT   10    7   11   11   19
-CONECT   11   10   10   12   13
+CONECT   10    7   11   19   19
+CONECT   11   10   12   13
 CONECT   12   11
-CONECT   13   11   14   15   15
+CONECT   13   11   14   15
 CONECT   14   13
-CONECT   15   13   13   16   17
+CONECT   15   13   16   17
 CONECT   16   15
-CONECT   17   15   18   19   19
+CONECT   17   15   18   19
 CONECT   18   17
-CONECT   19   10   17   17   20
+CONECT   19   10   10   17   20
 CONECT   20    1   19   21   22
 CONECT   21   20
 CONECT   22   20

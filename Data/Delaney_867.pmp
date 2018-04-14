@@ -1,4 +1,4 @@
-REMARK 111 MOLP: SMILES: s: CC=C(C(=CC)c1ccc(O)cc1)c1ccc(O)cc1
+REMARK 111 MOLP: SMILES: s: CC=C(C(=CC)c1ccc(O)cc1)c2ccc(O)cc2
 REMARK 111 MOLP: Area_F: f:     0.0000
 REMARK 111 MOLP: Area_C: f:    89.0058
 REMARK 111 MOLP: Area_CL: f:     0.0000

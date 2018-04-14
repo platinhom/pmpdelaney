@@ -1,4 +1,4 @@
-REMARK 111 MOLP: SMILES: s: COP(=S)(OC)Oc1ccc([N+](=O)[O-])cc1Cl
+REMARK 111 MOLP: SMILES: s: COP(=S)(OC)Oc1ccc(cc1Cl)N(=O)=O
 REMARK 111 MOLP: Area_F: f:     0.0000
 REMARK 111 MOLP: Area_C: f:    47.9469
 REMARK 111 MOLP: Area_CL: f:    25.5826

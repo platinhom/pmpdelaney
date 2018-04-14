@@ -1,4 +1,4 @@
-REMARK 111 MOLP: SMILES: s: O=[N+]([O-])c1cccc([N+](=O)[O-])c1
+REMARK 111 MOLP: SMILES: s: O=N(=O)c1cccc(c1)N(=O)=O
 REMARK 111 MOLP: Area_F: f:     0.0000
 REMARK 111 MOLP: Area_C: f:    41.6724
 REMARK 111 MOLP: Area_CL: f:     0.0000

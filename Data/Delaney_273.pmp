@@ -1,4 +1,4 @@
-REMARK 111 MOLP: SMILES: s: CC1(C)C(C=C(Br)Br)C1C(=O)OC(C#N)c1cccc(Oc2ccccc2)c1
+REMARK 111 MOLP: SMILES: s: CC1(C)C(C=C(Br)Br)C1C(=O)OC(C#N)c2cccc(Oc3ccccc3)c2
 REMARK 111 MOLP: Area_F: f:     0.0000
 REMARK 111 MOLP: Area_C: f:   113.9401
 REMARK 111 MOLP: Area_CL: f:     0.0000

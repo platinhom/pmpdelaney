@@ -1,4 +1,4 @@
-REMARK 111 MOLP: SMILES: s: O=c1[nH]c2cc(Cl)ccc2o1
+REMARK 111 MOLP: SMILES: s: Clc2ccc1oc(=O)[nH]c1c2
 REMARK 111 MOLP: Area_F: f:     0.0000
 REMARK 111 MOLP: Area_C: f:    50.2639
 REMARK 111 MOLP: Area_CL: f:    26.0328

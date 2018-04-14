@@ -67,12 +67,7 @@ features = [
 ]
 
 ```
-## Failed Data
 
-- 168: gdma result error.
-- 641: gdma result error.
-- 496: 
-- 963: 
 
 
 
