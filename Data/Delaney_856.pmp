@@ -1,4 +1,5 @@
 REMARK 111 MOLP: SMILES: s: Clc1ccc(cc1)C(c2ccc(Cl)cc2)C(Cl)(Cl)Cl
+REMARK 111 MOLP: ExpLogS: f:     -7.150
 REMARK 111 MOLP: Area_F: f:     0.0000
 REMARK 111 MOLP: Area_C: f:    73.2101
 REMARK 111 MOLP: Area_CL: f:   119.7555
